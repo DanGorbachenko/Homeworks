@@ -5,9 +5,9 @@ using namespace std;
 int main() {
   int number, factorial = 1;
   cin >> number;
-  for(int dividor = 2; dividor <= number; dividor++)
+  for(int n = 2; n <= number; n++)
   {
-    factorial *= dividor;
+    factorial *= n;
   }
   cout << factorial;
   return 0;
