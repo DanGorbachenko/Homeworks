@@ -7,7 +7,7 @@ int main() {
   int number;
   bool flag;
   cin >> number;
-  for(int i = 2; i < number; i++)
+  for(int i = 2; i <= number; i++)
   {
     flag = true;
     for(int dividor = 2; dividor <= sqrt(number); dividor++)
