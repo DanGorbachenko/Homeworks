@@ -303,28 +303,28 @@ void processChoice(int*& arr1, int*& arr2, int choice)
   case 0:
     cout << "Завершение работы программы" << endl;
     break;
-	case 1:
+  case 1:
     getNumbers(getQuantityNumbers(), arr1);
-		break;
-	case 2:
+    break;
+  case 2:
     int n, min, max;
     n = getQuantityNumbers();
     min = getMinNumber();
     max = getMaxNumber();
     addRandomElements(arr1, n, min, max);
-		break;
+    break;
   case 3:
     printArray(arr1);
-		break;
+    break;
   case 4:
     cout << search(arr1, getElement()) << endl;
-		break;
+    break;
   case 5:
     add(arr1, arr2);
-		break;
+    break;
   case 6:
     arr1 = unify(arr1, arr2);
-		break;
+    break;
   case 7:
     flag = insert(arr1, getIndex(), getElement());
     if(!flag)
@@ -335,7 +335,7 @@ void processChoice(int*& arr1, int*& arr2, int choice)
     {
       cout << "Нельзя добавить элемент с таким индексом" << endl;
     }
-		break;
+    break;
   case 8:
     flag = deleteGroup(arr1, getIndex(), getQuantityNumbers());
     if(!flag)
@@ -346,11 +346,11 @@ void processChoice(int*& arr1, int*& arr2, int choice)
     {
       cout << "Нельзя удалить группу элементов с таким индексом" << endl;
     }
-		break;
+    break;
   default:
     cout << "Неправильная команда! Попробуйте еще раз" << endl;
     break;
-	}
+  }
 }
 
 int main()
@@ -363,11 +363,11 @@ int main()
 	int choice = 0;
 	do
 	{
-		system("cls");
-		printMenu();
-		cin >> choice;
-		processChoice(a, b, choice);
-		system("pause");
+	  system("cls");
+	  printMenu();
+	  cin >> choice;
+	  processChoice(a, b, choice);
+	  system("pause");
 	} while (choice != 0);
 
 	deleteArray(a);
