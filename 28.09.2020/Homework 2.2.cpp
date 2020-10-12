@@ -35,6 +35,8 @@ void printArray(int* arr, int size)
 cout << "Current array is {";
 for (int i = 0; i < size; i++)
 cout << arr[i] << (i == size - 1 ? "}" : ", ");
+getchar();
+getchar();
 }
 
 void reverseMassive(int* arr, int size, int start = 0)
@@ -49,11 +51,11 @@ arr[i] = arr[i] - arr[start + size - i - 1];
 
 void changePairs(int* arr, int size)
 {
-for (int i = 0; i < size; i += 2)
+for (int i = 1; i < size - 1; i += 2)
 {
-arr[i] = arr[i] + arr[i + 1];
-arr[i + 1] = arr[i] - arr[i + 1];
-arr[i] = arr[i] - arr[i + 1];
+arr[i] = arr[i] ^ arr[i - 1];
+arr[i - 1] = arr[i] ^ arr[i - 1];
+arr[i] = arr[i] ^ arr[i + 1];
 }
 }
 
@@ -71,62 +73,63 @@ reverseMassive(arr, n);
 reverseMassive(arr, size, n);
 }
 
+void processChoice(int*& arr, int &N, int choice)
+{
+  int n, a, b;
+	switch (choice)
+	{
+  case 0:
+    cout << "Завершение работы программы" << endl;
+    break;
+  case 1:
+    cout << "Enter quantity of numbers to add to massive ";
+    cin >> n;
+    cout << endl << "Enter bottom boundary of numbers ";
+    cin >> a;
+    cout << endl << "Enter top boundary of numbers ";
+    cin >> b;
+    addRandomNumbers(n, a, b, arr, N);
+    N += n;
+    printArray(arr, N); 
+    break;
+  case 2:
+    reverseMassive(arr, N);
+    printArray(arr, N);
+    break;
+  case 3:
+    changePairs(arr, N);
+    printArray(arr, N);
+    break;
+  case 4:
+    movementRight(arr, N);
+    printArray(arr, N);
+    break;
+  case 5:
+    cout << "Enter index to split parts of massive ";
+    cin >> n;
+    reverseParts(n, arr, N);
+    printArray(arr, N);
+    break;
+  default:
+    cout << "Wrong command! Try another variant" << endl;
+    break;
+  }
+}
+
 int main()
 {
 int N = 4;
 int* arr = new int[N];
 int choice = 2, n, a, b;
 fillArray(arr, N);
-while (choice != 0)
-{
-system("cls");
-printArray(arr, N);
-cout << endl;
-printMenu();
-cin >> choice;
-switch (choice)
-{
-case 1:
-cout << "Enter quantity of numbers to add to massive ";
-cin >> n;
-cout << endl << "Enter bottom boundary of numbers ";
-cin >> a;
-cout << endl << "Enter top boundary of numbers ";
-cin >> b;
-addRandomNumbers(n, a, b, arr, N);
-N += n;
-printArray(arr, N);
-getchar();
-getchar();
-break;
-case 2:
-reverseMassive(arr, N);
-printArray(arr, N);
-getchar();
-getchar();
-break;
-case 3:
-changePairs(arr, N);
-printArray(arr, N);
-getchar();
-getchar();
-break;
-case 4:
-movementRight(arr, N);
-printArray(arr, N);
-getchar();
-getchar();
-break;
-case 5:
-cout << "Enter index to split parts of massive ";
-cin >> n;
-reverseParts(n, arr, N);
-printArray(arr, N);
-getchar();
-getchar();
-break;
-}
-}
+do
+	{
+	  system("cls");
+	  printMenu();
+	  cin >> choice;
+	  processChoice(arr, N, choice);
+	  system("pause");
+	} while (choice != 0);
 delete[] arr;
 return 0;
-}
+}
