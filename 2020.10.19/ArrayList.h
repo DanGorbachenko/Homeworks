@@ -113,12 +113,4 @@ public:
 	/// </summary>
 	/// <returns>поле count</returns>
 	int length();
-  
-  char* addPositive10();
-  char* addNegative10();
-  int* bubbleSort();
-  int getMin();
-  int getMax();
-  char* shuffle();
-  void changeNegatives();
 };
