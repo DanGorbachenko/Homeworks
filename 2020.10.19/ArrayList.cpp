@@ -51,7 +51,7 @@ bool ArrayList::add(int element)
 {
   if(capacity == count)
   {
-    expand(1);
+    ArrayList::expand(1);
   }
   count++;
   int* temp = new int[capacity];
@@ -71,7 +71,7 @@ bool ArrayList::add(int index, int element)
   {
     if(capacity == count)
     {
-      expand(1);
+      ArrayList::expand(1);
     }
     count++;
     int* temp = new int[capacity];
@@ -90,7 +90,7 @@ bool ArrayList::addAll(ArrayList& list)
 {
   if(capacity < count + list.count)
   {
-    expand(list.count);
+    ArrayList::expand(list.count);
   }
   count += list.count;
   int* temp = new int[capacity];
@@ -111,7 +111,7 @@ bool ArrayList::addAll(int index, ArrayList& list)
   {
     if(capacity < count + list.count)
     {
-      expand(list.count);
+      ArrayList::expand(list.count);
     }
     count += list.count;
     int* temp = new int[capacity];
