@@ -3,111 +3,85 @@
 
 using namespace std;
 
-char* addPositive10()
+void addPositive10(struct ArrayList list)
 {
-  if(capacity < count + 10)
-  {
-    expand(10 - capacity + count);
-  }
   srand(time(NULL));
-  int* temp = new int[capacity];
-  for (int i = 0; i < count; i++)
-    *(temp + i) = *(data + i);
-  for(int i = count; i < capacity; i++)
+  for(int i = 1; i <= 10; i++)
   {
-    *(temp + i) = 10 + rand() % 90;
+    list.add(10 + rand() % 90);
   }
-  count += 10;
-  delete[] data;
-  data = temp;
-  return toString();
+  cout << list.toString();
 }
 
-char* addNegative10()
+void addNegative10(struct ArrayList list)
 {
-  if(capacity < count + 10)
-  {
-    expand(10 - capacity + count);
-  }
   srand(time(NULL));
-  int* temp = new int[capacity];
-  for (int i = 0; i < count; i++)
-    *(temp + i) = *(data + i);
-  for(int i = count; i < capacity; i++)
+  for(int i = 1; i <= 10; i++)
   {
-    *(temp + i) = -10 - rand() % 90;
+    list.add(- 10 - rand() % 90);
   }
-  count += 10;
-  delete[] data;
-  data = temp;
-  return toString();
+  cout << list.toString();
 }
 
-int* bubbleSort()
+int getMin(struct ArrayList list)
 {
-  int *temp = data;
-  for(int i = 0; i < capacity - 1; i++)
+  int minElement = list.get(0);
+  for(int i = 1; i < list.length(); i++)
   {
-    for(int j = 0; j < capacity - i; j++)
+    if(minElement > list.get(i))
     {
-      if(*(temp + j) > *(temp + j + 1))
-      {
-        *(temp + j) = *(temp + j) ^ *(temp + j + 1);
-        *(temp + j + 1) = *(temp + j) ^ *(temp + j + 1);
-        *(temp + j) = *(temp + j) ^ *(temp + j + 1);
-      }
+      minElement = list.get(i);
     }
   }
-  return temp;
+  return minElement;
 }
 
-int getMin()
+int getMax(struct ArrayList list)
 {
-  int *temp = bubbleSort();
-  return *temp;
-}
-
-int getMax()
-{
-  int *temp = bubbleSort();
-  return *(temp + capacity);
-}
-
-char* shuffle()
-{
-  int *temp = new int[count];
-  for(int i = 0; i < count; i++)
+  int maxElement = list.get(0);
+  for(int i = 1; i < list.length(); i++)
   {
-    *(temp + i) = 0;
-  }
-  srand(time(NULL));
-  int index;
-  bool flag = true;
-  for(int i = 0; i < count; i++)
-  {
-    while(flag)
+    if(maxElement < list.get(i))
     {
-      index = rand() % count;
-      if(*(temp + index) == 0)
-      {
-        *(temp + index) = *(data + i);
-        flag = false;
-      }
+      maxElement = list.get(i);
     }
-    flag = true;
   }
-  delete[] data;
-  data = temp;
-  return toString(); 
+  return maxElement;
 }
 
-void changeNegatives()
+void swapMinMax(struct ArrayList list)
 {
-  for(int i = 0; i < count; i++)
+  int minElement = getMin(list);
+  int maxElement = getMax(list);
+  int minIndex, maxIndex;
+  minIndex = list.indexOf(minElement);
+  for(int i = list.length() - 1; i >= 0 ; i--)
   {
-    if(*(data + i) < 0)
+    if(list.get(i) == maxElement)
     {
-      *(data + i) = 0;
+      maxIndex = i;
+    }
+  }
+  list.swap(minIndex, maxIndex);
+  cout << list.toString();
+}
+
+void shuffle(struct ArrayList list)
+{
+  srand(time(NULL));
+  for(int i = 0; i < list.length(); i++)
+  {
+    list.swap(i, rand() % list.length());
+  }
+}
+
+void changeNegatives(struct ArrayList list)
+{
+  for(int i = 0; i < list.length(); i++)
+  {
+    if(list.get(i) < 0)
+    {
+      list.set(i, 0);
     }
   }
 }
@@ -115,10 +89,10 @@ void changeNegatives()
 int main() {
   struct ArrayList mas;
   mas.add(13);
-  mas.add(14);
-  mas.add(15);
-  cout << mas.toString() << endl;
-  cout << mas.addPositive10() << endl;
-  cout << mas.shuffle() << endl;
+  addPositive10(mas);
+  addNegative10(mas);
+  swapMinMax(mas);
+  shuffle(mas);
+  changeNegatives(mas);
   return 0;
 }
