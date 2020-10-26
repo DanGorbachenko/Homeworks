@@ -1,29 +1,30 @@
 #include <iostream>
+#include <ctime>
 #include "ArrayList.h"
 
 using namespace std;
 
-void addPositive10(struct ArrayList list)
+void addPositive10(struct ArrayList &list)
 {
   srand(time(NULL));
   for(int i = 1; i <= 10; i++)
   {
     list.add(10 + rand() % 90);
   }
-  cout << list.toString();
+  cout << list.toString() << endl;
 }
 
-void addNegative10(struct ArrayList list)
+void addNegative10(struct ArrayList &list)
 {
   srand(time(NULL));
   for(int i = 1; i <= 10; i++)
   {
     list.add(- 10 - rand() % 90);
   }
-  cout << list.toString();
+  cout << list.toString() << endl;
 }
 
-int getMin(struct ArrayList list)
+int getMin(struct ArrayList &list)
 {
   int minElement = list.get(0);
   for(int i = 1; i < list.length(); i++)
@@ -36,7 +37,7 @@ int getMin(struct ArrayList list)
   return minElement;
 }
 
-int getMax(struct ArrayList list)
+int getMax(struct ArrayList &list)
 {
   int maxElement = list.get(0);
   for(int i = 1; i < list.length(); i++)
@@ -49,7 +50,7 @@ int getMax(struct ArrayList list)
   return maxElement;
 }
 
-void swapMinMax(struct ArrayList list)
+void swapMinMax(struct ArrayList &list)
 {
   int minElement = getMin(list);
   int maxElement = getMax(list);
@@ -63,19 +64,20 @@ void swapMinMax(struct ArrayList list)
     }
   }
   list.swap(minIndex, maxIndex);
-  cout << list.toString();
+  cout << list.toString() << endl;
 }
 
-void shuffle(struct ArrayList list)
+void shuffle(struct ArrayList &list)
 {
   srand(time(NULL));
   for(int i = 0; i < list.length(); i++)
   {
-    list.swap(i, rand() % list.length());
+    list.swap(i, rand() % (list.length() - 1));
   }
+  cout << list.toString() << endl;
 }
 
-void changeNegatives(struct ArrayList list)
+void changeNegatives(struct ArrayList &list)
 {
   for(int i = 0; i < list.length(); i++)
   {
@@ -84,6 +86,7 @@ void changeNegatives(struct ArrayList list)
       list.set(i, 0);
     }
   }
+  cout << list.toString() << endl;
 }
 
 int main() {
