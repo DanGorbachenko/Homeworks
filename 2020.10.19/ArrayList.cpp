@@ -51,7 +51,7 @@ bool ArrayList::add(int element)
 {
   if(capacity == count)
   {
-    ArrayList::expand(1);
+    expand(1);
   }
   count++;
   int* temp = new int[capacity];
@@ -60,6 +60,7 @@ bool ArrayList::add(int element)
   *(temp + count - 1) = element;
   delete[] data;
   data = temp;
+  //std::cout << length() << "In add" << std::endl;
   return true;
 }
 
@@ -71,7 +72,7 @@ bool ArrayList::add(int index, int element)
   {
     if(capacity == count)
     {
-      ArrayList::expand(1);
+      expand(1);
     }
     count++;
     int* temp = new int[capacity];
@@ -90,7 +91,7 @@ bool ArrayList::addAll(ArrayList& list)
 {
   if(capacity < count + list.count)
   {
-    ArrayList::expand(list.count);
+    expand(list.count);
   }
   count += list.count;
   int* temp = new int[capacity];
@@ -111,7 +112,7 @@ bool ArrayList::addAll(int index, ArrayList& list)
   {
     if(capacity < count + list.count)
     {
-      ArrayList::expand(list.count);
+      expand(list.count);
     }
     count += list.count;
     int* temp = new int[capacity];
