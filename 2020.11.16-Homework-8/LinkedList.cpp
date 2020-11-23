@@ -228,7 +228,8 @@ int LinkedList::extractTail()
     {
         temp = temp->next;
     }
-    temp->next = nullptr;
+    tail = temp;
+    tail->next = nullptr;
     count--;
     delete end;
     return result;
