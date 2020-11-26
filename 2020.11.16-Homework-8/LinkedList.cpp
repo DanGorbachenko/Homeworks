@@ -277,8 +277,10 @@ LinkedList& LinkedList::operator=(LinkedList list)
     head = list.head;
     count = list.count;
     Node* temp = list.head->next;
+    list.extractHead();
     while (temp != nullptr)
     {
+        list.extractHead();
         addToTail(temp->data);
         temp = temp->next;
     }
