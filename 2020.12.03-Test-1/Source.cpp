@@ -36,6 +36,6 @@ int main()
     cin >> x;
     cin >> n;
     cout << "Calculated value is " << setprecision(n) << sh(x, n) << endl;
-    cout << "True value is " << setprecision(n) << sinh(x) << endl;
+    cout << "True value is " << setprecision(9) << sinh(x) << endl;
     return 0;
 }
