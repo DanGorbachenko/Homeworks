@@ -4,22 +4,39 @@ using namespace std;
 
 int main()
 {
-    int N;
-    cin>>N;
-    int* a = new int[N * N]{ 0 };
-    for (int i = 0; i < N; ++i)
+    int n = 0;
+    cin >> n;
+
+    int** data = new int* [n];
+    for (int i = 0; i < n; ++i)
     {
-        for (int j = 0; j < N; ++j)
+        data[i] = new int[n];
+    }
+
+
+
+    for (int i = 0; i < n; ++i)
+    {
+        for (int j = 0; j < n; ++j)
         {
-            a[i * N + j] = i + j + 1;
+            data[i][j] = i + j + 1;
         }
     }
 
-    for (int i = 0; i < N * N; ++i)
+    for (int i = 0; i < n; ++i)
     {
-        printf("%2d%c", a[i], ((i + 1) % N == 0 ? '\n' : ' '));
+        for (int j = 0; j < n; ++j)
+        {
+            printf("%2d ", data[i][j]);
+        }
+        cout << endl;
     }
-    delete[] a;
+
+    for (int i = 0; i < n; ++i)
+    {
+        delete[] data[i];
+    }
+    delete[] data;
 
     return 0;
 }

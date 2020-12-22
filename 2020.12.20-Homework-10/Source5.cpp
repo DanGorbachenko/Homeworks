@@ -4,46 +4,60 @@ using namespace std;
 
 int main()
 {
-    int N;
-    cin >> N;
-    int* a = new int[N * N]{ 0 };
+    int n;
+    cin >> n;
+    int** data = new int*[n];
+    for (int i = 0; i < n; ++i)
+    {
+        data[i] = new int[n] {0};
+    }
     int delta = 0;
     int el = 0;
     while (true)
     {
-        for (int i = (N + 1) * delta; i <= N * (delta + 1) - 1 - delta; i++)
+        for (int i = delta; i < n - delta; i++)
         {
-            a[i] = ++el;
+            data[delta][i] = ++el;
         }
         delta++;
-        for (int i = delta + 1; i <= N - delta + 1; i++)
+        for (int i = delta; i < n - delta + 1; i++)
         {
-            a[N * i - delta] = ++el;
+            data[i][n - delta] = ++el;
         }
-        if (el >= N * N)
+        if (el >= n * n)
         {
             break;
         }
-        for (int i = N * (N + 1 - delta) - 1 - delta; i >= N * (N - delta) - 1 + delta; i--)
+        for (int i = n - delta - 1; i >= delta - 1; i--)
         {
-            a[i] = ++el;
+            data[n - delta][i] = ++el;
         }
-        if (el >= N * N)
+        if (el >= n * n)
         {
             break;
         }
-        for (int i = (N - delta - 1) * N + delta - 1; i >= delta * N + delta - 1; i-=N)
+        for (int i = n - delta - 1; i >= delta; i--)
         {
-            a[i] = ++el;
+            data[i][delta - 1] = ++el;
         }
     }
 
-    for (int i = 0; i < N * N; ++i)
+    for (int i = 0; i < n; ++i)
     {
-        printf("%3d%c", a[i], ((i + 1) % N == 0 ? '\n' : ' '));
+        for (int j = 0; j < n; ++j)
+        {
+            printf("%4d ", data[i][j]);
+        }
+        cout << endl;
     }
-    delete[] a;
+
+    for (int i = 0; i < n; ++i)
+    {
+        delete[] data[i];
+    }
+    delete[] data;
 
     return 0;
 }
+
 
