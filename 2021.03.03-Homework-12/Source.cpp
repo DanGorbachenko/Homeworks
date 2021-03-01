@@ -1,7 +1,7 @@
 #include<iostream>
 #include<cmath>
 #include<string>
- 
+
 using namespace std;
 
 template<class T1, class T2>
@@ -9,65 +9,66 @@ T1 sum(T1 a, T2 b)
 {
 	return a + b;
 }
+
 template<class T1, class T2>
 T1 diff(T1 a, T2 b)
 {
 	return a - b;
 }
 template<class T1, class T2>
-T1 um(T1 a, T2 b)
+T1 mult(T1 a, T2 b)
 {
 	return a * b;
 }
+
 template<class T1, class T2>
-T1 del(T1 a, T2 b)
+T1 div(T1 a, T2 b)
 {
 	return a / b;
 }
+
 template<class T1, class T2>
 T1 ost(T1 a, T2 b)
 {
 	return a - b * (trunc(a / b));
 }
-template<class T1, class T2>
-void calc(T1 a, T2 b, char symb, T1 (*op)(T1, T2))
+
+int operationIndex(char operation)
 {
-	cout << a << " " << symb << " " << b << " = " << (T1)op(a, b) << endl;
-	//return op(a, b);
-}
-template<class T1, class T2>
-int resolveOpNumber(T1 operand1, T2 operand2, char op)
-{
-	switch (op)
+	switch (operation)
 	{
 	case '+':
-		calc(operand1, operand2, '+', sum);
 		return 0;
 		break;
 	case '-':
-		calc(operand1, operand2, '-', diff);
-		return 0;
+		return 1;
 		break;
 	case '*':
-		calc(operand1, operand2, '*', um);
-		return 0;
+		return 2;
 		break;
 	case '/':
-		calc(operand1, operand2, '/', del);
-		return 0;
+		return 3;
 		break;
 	case '%':
-		calc(operand1, operand2, '%', ost);
-		return 0;
+		return 4;
 		break;
 	default:
-		cout << "Something going wrong" << endl;
-		return 1;
+		return -1;
 	}
 }
 
+template<class T1, class T2>
+T1 calc(T1 a, T2 b, char operation)
+{
+	T1(*operations[5])(T1, T2) { sum, diff, mult, div, ost };
+	return operations[operationIndex(operation)](a, b);
+}
 
-
+template<class T1, class T2>
+void resolveOpNumber(T1 operand1, T2 operand2, char op)
+{
+	cout << operand1 << " " << op << " " << operand2 << " = " << calc(operand1, operand2, op) << endl;
+}
 
 int main(int argc, char* argv[])
 {
@@ -83,11 +84,11 @@ int main(int argc, char* argv[])
 		double operand2 = stod(argv[4]);
 		string key3 = argv[5];
 		char op = *argv[6];
-		/*if ((key1 != "—operand1") || (key2 != "—operand2") || (key3 != "—operator"))
+		/*if ((key1 != "â€”operand1") || (key2 != "â€”operand2") || (key3 != "â€”operator"))
 		{
 			cout << "Wrong keys!" << endl;
 		}*/
-		if ((key1.compare("—operand1\0")) || (key2.compare("—operand2\0")) || (key3.compare("—operator\0")))
+		if ((key1.compare("â€”operand1\0")) || (key2.compare("â€”operand2\0")) || (key3.compare("â€”operator\0")))
 		{
 			cout << "Wrong keys!" << endl;
 		}
@@ -95,4 +96,3 @@ int main(int argc, char* argv[])
 	}
 	return 0;
 }
-
