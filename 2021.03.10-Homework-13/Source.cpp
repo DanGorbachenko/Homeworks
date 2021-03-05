@@ -4,12 +4,12 @@
 
 using namespace std;
 
-bool isDigit(char c);//                        +
-bool isSign(char c);//                         +
-bool isNatural(string str, int& index);//      +
-bool isExponent(string str, int& index);//     .?
-bool isMantissa(string str, int& index);//     .
-bool isReal(string str, int& index);//         -
+bool isDigit(char c);                        
+bool isSign(char c);                  
+bool isNatural(string str, int& index);
+bool isExponent(string str, int& index);
+bool isMantissa(string str, int& index);
+bool isReal(string str, int& index);
 
 int main()
 {
@@ -20,8 +20,8 @@ int main()
 		fin >> real;
 	}
 	int index = 0;
-	//cout << real.length();
-	if (isReal(real, index)) // isReal
+	
+	if (isReal(real, index)) 
 	{
 		cout << "=)";
 	}
@@ -38,10 +38,10 @@ bool isDigit(char c)
 	return c >= '0' && c <= '9';
 }
 
-bool isSign(char c)// сам
+bool isSign(char c)
 {
 	return c == '+' || c == '-';
-	//return c == '-';
+	
 }
 
 bool isNatural(string str, int& index)
@@ -54,7 +54,7 @@ bool isNatural(string str, int& index)
 	return false;
 }
 
-bool isExponent(string str, int& index) // сам, что такое Е???
+bool isExponent(string str, int& index) 
 {
 	if (str[index] == 'E' || str[index] == 'e')
 	{
@@ -72,7 +72,7 @@ bool isExponent(string str, int& index) // сам, что такое Е???
 	return false;
 }
 
-bool isMantissa(string str, int& index) //  сам
+bool isMantissa(string str, int& index) 
 {
 	if (isSign(str[index]) || isDigit(str[index]))
 	{
