@@ -1,4 +1,4 @@
-/*#include<iostream>
+#include<iostream>
 #include<fstream>
 
 using namespace std;
@@ -42,4 +42,4 @@ int main()
 	fbin.close();
 
 	return 0;
-}*/
+}
